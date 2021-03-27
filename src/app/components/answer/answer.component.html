@@ -1,0 +1,34 @@
+<h5 class="card-title">
+    RESULTADO
+</h5>
+<p class="card-text">Este es el resultado del examen:</p>
+<div *ngFor="let pregunta of listPreguntas; let i = index">
+<h4 class="card-title"> {{pregunta.pregunta}} </h4>
+<ul class="list-group">
+    <ng-container *ngFor="let respuesta of listPreguntas[i].respuestas; let j = index">
+        <li class="list-group-item" [ngClass]= "{
+            'list-group-item-success': respuesta.correcta == 1 && respuestasUsuario[i] == j,
+            'list-group-item-danger': respuesta.correcta == 0 && respuestasUsuario[i] == j
+        }" >
+            {{respuesta.nombre}}
+            <span *ngIf="respuesta.correcta == 1 && respuestasUsuario[i] == j" class="material-icons correct badge">
+                check_circle
+            </span>
+            <span *ngIf="respuesta.correcta == 0 && respuestasUsuario[i] == j" class="material-icons incorrect badge">
+                clear
+            </span>
+        </li>
+    </ng-container>
+</ul>
+</div>
+<br>
+<br>
+<div class="row">
+    <div class="col-lg-4 offset-lg-4">
+        <button (click)="volver()"
+                class="btn btn-lg btn-success btn-block">
+            volver
+        </button>
+    </div>
+</div>
+
